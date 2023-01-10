@@ -1,0 +1,10 @@
+.button {
+  border: 1px solid lightgray;
+  width: 500px;
+  padding: 10px;
+  margin-left: 10cm;
+  text-align: right;
+}
+h3 {
+  text-align: left;
+}
