@@ -1,4 +1,4 @@
-import "../pages/signin.css";
+import profileStyle1 from '../pages/profile.css'
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 const Profile = () => {
@@ -40,32 +40,54 @@ const Profile = () => {
   return (
     <div>
       <form className="signIn">
-        <p>Account Deatails</p>
+        <p style={{textAlign:'center'}}>Account Deatails</p>
+        <div>
         <label>First Name</label>
+        </div>
+        <div>
         <input
+          className='input-text'
           value={firstName}
           onChange={(e) => {
             setFirstName(e.target.value);
           }}
         ></input>
+        </div>
+        <div>
         <label> Surname</label>
+        </div>
+        <div>
         <input
+        className='input-text'
           value={surname}
           onChange={(e) => {
             setSurname(e.target.value);
           }}
-        ></input>
-        <label>Email</label>
+        ></input> 
+        </div>
+        <div>
+        <label>Email</label> 
+        </div>
+        <div>
         <input
+        className='input-text'
           value={email}
           onChange={(e) => {
             setEmail(e.target.value);
           }}
         ></input>
-        <label>Password</label>
-        <input></input>
-
-        <button type="submit">Save changes</button>
+        </div>
+       <div>
+       <label>Password</label>
+       </div>
+       <div>
+       <input
+       className='input-text'
+       ></input>
+       </div>
+       <div>
+       <button className='savebtn' type="submit">Save changes</button>
+       </div>
       </form>
     </div>
   );

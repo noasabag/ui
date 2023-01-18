@@ -1,4 +1,4 @@
-import "../pages/signin.css";
+import signinStyle from "../pages/signin.css";
 import React, { useCallback, useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -29,7 +29,7 @@ const SigninScreen = () => {
     };
 
     axios(option)
-      .then(function(response) {
+      .then(function (response) {
         const { token } = response.data;
 
         if (response.status === 200) {
@@ -43,6 +43,8 @@ const SigninScreen = () => {
         // console.log(response.data + "  " + isLoggedIn + response.status);
       })
       .catch((error) => {
+        localStorage.setItem("token", "");
+
         setIsLoggedIn(false);
 
         //console.log(error + " " + isLoggedIn);
@@ -63,41 +65,63 @@ const SigninScreen = () => {
           e.preventDefault();
         }}
       >
-        <h2>Sign in</h2>
-        <p>Enter your email and password to sign in</p>
-        <label>Email</label>
-        <input
-          onChange={(e) => {
-            setEmail(e.target.value);
-          }}
-          placeholder="Enter your email"
-        ></input>
-        <label>Password</label>
+        <h2 style={{ textAlign: "center" }}>Sign in</h2>
+        <p style={{ textAlign: "center" }}>
+          Enter your email and password to sign in
+        </p>
+        <div>
+          <label>Email</label>
+        </div>
+        <div>
+          <input
+            className="input-text"
+            onChange={(e) => {
+              setEmail(e.target.value);
+            }}
+            placeholder="Enter your email"
+          ></input>
+        </div>
+        <div>
+          <label>Password</label>
+        </div>
+        <div>
+          <input
+            className="input-text"
+            id="password"
+            type={passwordShown ? "text" : "password"}
+            onChange={(e) => {
+              setPassword(e.target.value);
+            }}
+            placeholder="Enter your password"
+          />
+          <input
+            id="toggle-password"
+            type="checkbox"
+            onClick={togglePassword}
+          />
+          <label htmlFor="toggle-password">Show Password</label> <br />
+        </div>
+        <div>
+          <button className="signin-btn" type="submit" onClick={signinHandler}>
+            Sign in
+          </button>
+        </div>
+        <div style={{ marginTop: "10px" }}>
+          <input type="checkbox" name="loggedin" />{" "}
+          <label>Keep me logged in</label>
+        </div>
 
-        <input
-          id="password"
-          type={passwordShown ? "text" : "password"}
-          onChange={(e) => {
-            setPassword(e.target.value);
-          }}
-          placeholder="Enter your password"
-        />
-        <input id="toggle-password" type="checkbox" onClick={togglePassword} />
-        <label htmlFor="toggle-password">Show Password</label>
-
-        <button type="submit" onClick={signinHandler}>
-          Sign in
-        </button>
-        <label>Keep me logged in</label>
-        <input type="checkbox" name="loggedin" />
-        <p>Don't have an account?</p>
-        <button
-          onClick={() => {
-            navigate("/signup");
-          }}
-        >
-          Sign up
-        </button>
+        <p style={{ textAlign: "center" }}>
+          Don't have an account?
+          <button
+            className="signup-link"
+            onClick={() => {
+              navigate("/signup");
+            }}
+          >
+            Sign up
+          </button>{" "}
+        </p>
       </form>
     </div>
   );

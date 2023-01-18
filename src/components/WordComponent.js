@@ -1,31 +1,39 @@
 import "../pages/word.css";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useState } from "react";
 import "../pages/text.css";
 import axios from "axios";
 const WordComponent = (props) => {
-  const [word, setWord] = useState("");
-  const { wordNtranslate } = props;
+  const { nativeWord, translate, title } = props;
   const onclickHandler = useCallback(async () => {
     const option = {
       method: "POST",
       headers: {
         Authorization: localStorage.getItem("token"),
       },
-      data: { ...wordNtranslate },
+      data: { nativeWord, translate, title },
     };
 
     await axios(`http://localhost:3001/word/addWordToTheList`, option)
-      .then((response) => {})
+      .then((response) => {
+      })
       .catch((e) => {
         console.log("whhattt" + e);
       });
-  }, [wordNtranslate]);
+  }, [nativeWord, translate]);
   return (
-    <div className="text">
-      <p>
-        {props.wordNtranslate.nativeWord} : {props.wordNtranslate.translate}
-      </p>
-      <button onClick={onclickHandler}>save</button>
+    <div className="textpage-cont">
+      <div className="word-box">
+        <div>
+          <p>
+            {nativeWord} : {translate}
+          </p>
+          <div className="flex">
+            <button onClick={onclickHandler} className="display-text save-word">
+              Save word
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
